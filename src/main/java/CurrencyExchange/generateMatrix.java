@@ -12,8 +12,8 @@ public class generateMatrix {
         // 假设这是你获得的汇率数据
         Map<String, Double> exchangeRates = new HashMap<>();
         exchangeRates.put("USD", getRate("USD"));
-        exchangeRates.put("EUR", 0.85);
-        exchangeRates.put("JPY", 113.0);
+        exchangeRates.put("EUR", getRate("EUR"));
+        exchangeRates.put("JPY", getRate("JPY"));
         // 添加其他货币汇率
 
         // 定义货币列表
