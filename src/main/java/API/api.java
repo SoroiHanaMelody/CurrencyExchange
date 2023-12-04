@@ -9,7 +9,7 @@ public class api {
     public static void main(String[] args) {
         try {
             // 设置 API 请求 URL
-            String apiUrl = "http://api.exchangeratesapi.io/v1/latest?access_key=b223c5329013e2ae72309494ca2df200";
+            String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_I0crO06xVtiV7EhPO3PTCiZ9oTBCzFKaaGGCOtBM&currencies=EUR%2CUSD%2CCAD&base_currency=CNY";
             URL url = new URL(apiUrl);
 
             // 打开连接
