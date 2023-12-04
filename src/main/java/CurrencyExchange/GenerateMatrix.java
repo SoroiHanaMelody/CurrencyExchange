@@ -2,32 +2,31 @@ package CurrencyExchange;
 
 import java.util.HashMap;
 import java.util.Map;
-import API.getData;
 
 import static API.getData.getRate;
 
-public class generateMatrix {
+public class GenerateMatrix {
 
-    public static void main(String[] args) {
-        // 假设这是你获得的汇率数据
-        Map<String, Double> exchangeRates = new HashMap<>();
-        exchangeRates.put("CNY", 1.0);
-        exchangeRates.put("USD", getRate("USD"));
-        exchangeRates.put("EUR", getRate("EUR"));
-        exchangeRates.put("CAD", getRate("CAD"));
-        // 添加其他货币汇率
+//    public static void main(String[] args) {
+//        // 假设这是你获得的汇率数据
+//        Map<String, Double> exchangeRates = new HashMap<>();
+//        exchangeRates.put("CNY", 1.0);
+//        exchangeRates.put("USD", getRate("USD"));
+//        exchangeRates.put("EUR", getRate("EUR"));
+//        exchangeRates.put("CAD", getRate("CAD"));
+//        // 添加其他货币汇率
+//
+//        // 定义货币列表
+//        String[] currencies = exchangeRates.keySet().toArray(new String[0]);
+//
+//        // 创建 n×n 矩阵
+//        double[][] exchangeMatrix = createExchangeMatrix(currencies, exchangeRates);
+//
+//        // 打印矩阵
+//        printMatrix(exchangeMatrix, currencies);
+//    }
 
-        // 定义货币列表
-        String[] currencies = exchangeRates.keySet().toArray(new String[0]);
-
-        // 创建 n×n 矩阵
-        double[][] exchangeMatrix = createExchangeMatrix(currencies, exchangeRates);
-
-        // 打印矩阵
-        printMatrix(exchangeMatrix, currencies);
-    }
-
-    private static double[][] createExchangeMatrix(String[] currencies, Map<String, Double> exchangeRates) {
+    public double[][] createExchangeMatrix(String[] currencies, Map<String, Double> exchangeRates) {
         int n = currencies.length;
         double[][] exchangeMatrix = new double[n][n];
 
@@ -43,7 +42,8 @@ public class generateMatrix {
                     double exchangeRate = exchangeRates.getOrDefault(toCurrency, 0.0) / exchangeRates.getOrDefault(fromCurrency, 1.0);
 
                     // 计算-log值并存储到矩阵中
-                    exchangeMatrix[i][j] = -Math.log(exchangeRate);
+                    //exchangeMatrix[i][j] = -Math.log(exchangeRate);
+                    exchangeMatrix[i][j] = exchangeRate;
                 }
             }
         }
@@ -51,7 +51,7 @@ public class generateMatrix {
         return exchangeMatrix;
     }
 
-    private static void printMatrix(double[][] matrix, String[] currencies) {
+    public void printMatrix(double[][] matrix, String[] currencies) {
         // 打印矩阵
         System.out.print("\t");
         for (String currency : currencies) {

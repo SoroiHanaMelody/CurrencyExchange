@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class currencyExchange {
+public class CurrencyExchange {
     private static final int INF = 1000000;
 
     // Function to find arbitrage opportunities in currency exchange rates
-    private static void findArbitrage(double[][] rates) {
+    public void findArbitrage(double[][] rates) {
         int N = rates.length;
         double[][] logRates = new double[N][N];
 
@@ -79,30 +79,30 @@ public class currencyExchange {
 
 
 
-    public static void main(String[] args) {
-        double[][] ratesExample = {
-                {1, 0.741, 0.657, 1.061, 1.005},
-                {1.349, 1, 0.888, 1.433, 1.366},
-                {1.521, 1.126, 1, 1.614, 1.538},
-                {0.942, 0.698, 0.619, 1, 0.953},
-                {0.995, 0.732, 0.650, 1.049, 1}
-        };
-        double[][] ratesExample2 = {
-                {1, 0.9, 1.2, 0.8, 1.1},
-                {1.1, 1, 1.3, 0.7, 0.9},
-                {0.8, 1.2, 1, 1.1, 0.9},
-                {1.3, 0.7, 0.9, 1, 1.2},
-                {0.9, 1.1, 1.4, 0.8, 1}
-        };
-        double[][] ratesExample3 = {
-                {1, 0.9, 1.2, 0.8},
-                {1.1, 1, 1.3, 0.7},
-                {0.8, 1.2, 1, 1.1},
-                {1.3, 0.7, 0.9, 1}
-        };
-
-        findArbitrage(ratesExample);
-        findArbitrage(ratesExample2);
-        findArbitrage(ratesExample3);
-    }
+//    public static void main(String[] args) {
+//        double[][] ratesExample = {
+//                {1, 0.741, 0.657, 1.061, 1.005},
+//                {1.349, 1, 0.888, 1.433, 1.366},
+//                {1.521, 1.126, 1, 1.614, 1.538},
+//                {0.942, 0.698, 0.619, 1, 0.953},
+//                {0.995, 0.732, 0.650, 1.049, 1}
+//        };
+//        double[][] ratesExample2 = {
+//                {1, 0.9, 1.2, 0.8, 1.1},
+//                {1.1, 1, 1.3, 0.7, 0.9},
+//                {0.8, 1.2, 1, 1.1, 0.9},
+//                {1.3, 0.7, 0.9, 1, 1.2},
+//                {0.9, 1.1, 1.4, 0.8, 1}
+//        };
+//        double[][] ratesExample3 = {
+//                {1, 0.9, 1.2, 0.8},
+//                {1.1, 1, 1.3, 0.7},
+//                {0.8, 1.2, 1, 1.1},
+//                {1.3, 0.7, 0.9, 1}
+//        };
+//
+//        findArbitrage(ratesExample);
+//        findArbitrage(ratesExample2);
+//        findArbitrage(ratesExample3);
+//    }
 }
