@@ -1,15 +1,15 @@
-package API;
+package test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class api {
-    public String fetchData() {
+public class API {
+    public static void main(String[] args) {
         try {
             // 设置 API 请求 URL
-            String apiUrl = "https://api.currencyapi.com/v3/latest?apikey=fca_live_I0crO06xVtiV7EhPO3PTCiZ9oTBCzFKaaGGCOtBM&currencies=&base_currency=CNY";
+            String apiUrl = "https://api.currencyapi.com/v3/latest?apikey=fca_live_I0crO06xVtiV7EhPO3PTCiZ9oTBCzFKaaGGCOtBM";
             URL url = new URL(apiUrl);
 
             // 打开连接
@@ -32,20 +32,16 @@ public class api {
                 }
                 reader.close();
 
-                // 关闭连接
-                connection.disconnect();
-
-                // 返回响应数据
-                return response.toString();
+                // 处理响应数据，这里简单输出到控制台
+                System.out.println(response.toString());
             } else {
                 System.out.println("请求失败，响应代码：" + responseCode);
             }
+
+            // 关闭连接
+            connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // 发生异常或者请求失败时返回空字符串或者其他合适的默认值
-        return "";
     }
 }
-

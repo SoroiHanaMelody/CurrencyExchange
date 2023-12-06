@@ -1,9 +1,9 @@
 package Main;
 
 
+import API.api;
 import CurrencyExchange.GenerateMatrix;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -14,6 +14,9 @@ import CurrencyExchange.CurrencyExchange;
 // 然后按 Enter 键。现在，您可以在代码中看到空格字符。
 public class Main {
     public static void main(String[] args) {
+        //获取当前实时汇率数据
+        api api = new api();
+        String datasource = api.fetchData();
         // 从用户输入中获取货币代码字符串
         Scanner scanner = new Scanner(System.in);
         System.out.println("请输入所有货币代码，以 '/' 分隔：");
@@ -26,19 +29,27 @@ public class Main {
         Map<String, Double> exchangeRates = new HashMap<>();
         for (String currency : currencies) {
             String currencyCode = currency.trim();
-            exchangeRates.put(currencyCode, getRate(currencyCode));
+            exchangeRates.put(currencyCode, getRate(currencyCode, datasource));
         }
-        // 添加其他货币汇率
 
-        // 创建 GenerateMatrix 实例并生成矩阵
+        //创建 GenerateMatrix 实例并生成矩阵
         GenerateMatrix matrixGenerator = new GenerateMatrix();
         double[][] exchangeMatrix = matrixGenerator.createExchangeMatrix(currencies, exchangeRates);
+        double[][] logExchangeMatrix = matrixGenerator.createlogExchangeMatrix(currencies, exchangeRates);
+
+        // 打印生成的矩阵
+        System.out.println("\nCurrency Matrix：");
+        matrixGenerator.printMatrix(exchangeMatrix, currencies);
+        System.out.println("\n-Log Currency Matrix：");
+        matrixGenerator.printMatrix(logExchangeMatrix, currencies);
+        System.out.println();
 
         //寻找套汇路径
         CurrencyExchange currencyExchange = new CurrencyExchange();
-        currencyExchange.findArbitrage(exchangeMatrix);
-
-        // 打印生成的矩阵
-        matrixGenerator.printMatrix(exchangeMatrix, currencies);
+        currencyExchange.findArbitrage(exchangeMatrix, currencies);
     }
 }
+//case can be use
+//CNY/EUR/HKD/IDR/JPY/KRW
+//CNY/EUR/HKD/IDR/JPY/KRW/NZD
+//CAD/CNY/EUR/HKD/IDR
