@@ -20,7 +20,7 @@ public class GenerateMatrix {
                     double exchangeRate = exchangeRates.getOrDefault(toCurrency, 0.0) / exchangeRates.getOrDefault(fromCurrency, 1.0);
 
                     // 计算-log值并存储到矩阵中
-                    logExchangeMatrix[i][j] = -Math.log(exchangeRate);
+                    logExchangeMatrix[i][j] = -Math.log10(exchangeRate);
                     exchangeMatrix[i][j] = exchangeRate;
                 }
             }
@@ -45,7 +45,7 @@ public class GenerateMatrix {
                     double exchangeRate = exchangeRates.getOrDefault(toCurrency, 0.0) / exchangeRates.getOrDefault(fromCurrency, 1.0);
 
                     // 计算-log值并存储到矩阵中
-                    logExchangeMatrix[i][j] = -Math.log(exchangeRate);
+                    logExchangeMatrix[i][j] = -Math.log10(exchangeRate);
                 }
             }
         }
@@ -64,7 +64,7 @@ public class GenerateMatrix {
         for (int i = 0; i < matrix.length; i++) {
             System.out.printf("%-10s\t", currencies[i]);
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.printf("%.4f\t\t", matrix[i][j]);
+                System.out.printf("%.10f\t\t", matrix[i][j]);
             }
             System.out.println();
         }

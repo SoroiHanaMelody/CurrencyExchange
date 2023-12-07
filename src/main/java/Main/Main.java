@@ -50,6 +50,5 @@ public class Main {
     }
 }
 //case can be use
-//CNY/EUR/HKD/IDR/JPY/KRW
-//CNY/EUR/HKD/IDR/JPY/KRW/NZD
 //CAD/CNY/EUR/HKD/IDR
+//CNY/EUR/HKD/JPY/KRW
