@@ -8,21 +8,21 @@ import java.net.URL;
 public class api {
     public String fetchData() {
         try {
-            // 设置 API 请求 URL
+            // Set the API and request URL
             String apiUrl = "https://api.currencyapi.com/v3/latest?apikey=fca_live_I0crO06xVtiV7EhPO3PTCiZ9oTBCzFKaaGGCOtBM&currencies=&base_currency=CNY";
             URL url = new URL(apiUrl);
 
-            // 打开连接
+            // Open connection
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            // 设置请求方法
+            // Set request method
             connection.setRequestMethod("GET");
 
-            // 获取响应代码
+            // Get response code
             int responseCode = connection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // 读取响应内容
+                // Read response content
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -32,19 +32,19 @@ public class api {
                 }
                 reader.close();
 
-                // 关闭连接
+                // Close connection
                 connection.disconnect();
 
-                // 返回响应数据
+                // Return response content
                 return response.toString();
             } else {
-                System.out.println("请求失败，响应代码：" + responseCode);
+                System.out.println("Request failed, response code：" + responseCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // 发生异常或者请求失败时返回空字符串或者其他合适的默认值
+        // Return empty string if failed
         return "";
     }
 }

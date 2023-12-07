@@ -11,15 +11,15 @@ public class GenerateMatrix {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == j) {
-                    // 对角线上的元素，汇率值为 1（每种货币相对于自己的汇率）
+                    // Diagonal element with an exchange rate value of 1 (each currency's exchange rate relative to its own)
                     exchangeMatrix[i][j] = 1.0;
                 } else {
-                    // 使用获得的汇率值，如果没有特定的汇率，可以考虑将缺失的值设置为默认值或特殊值
+                    // Use the obtained exchange rate value, if there is no specific exchange rate, you can consider setting the missing value to the default value or special value
                     String fromCurrency = currencies[i];
                     String toCurrency = currencies[j];
                     double exchangeRate = exchangeRates.getOrDefault(toCurrency, 0.0) / exchangeRates.getOrDefault(fromCurrency, 1.0);
 
-                    // 计算-log值并存储到矩阵中
+                    // Store the value in the matrix
                     logExchangeMatrix[i][j] = -Math.log10(exchangeRate);
                     exchangeMatrix[i][j] = exchangeRate;
                 }
@@ -36,15 +36,15 @@ public class GenerateMatrix {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == j) {
-                    // 对角线上的元素，汇率值为 1（每种货币相对于自己的汇率）
+                    // Diagonal element with an exchange rate value of 1 (each currency's exchange rate relative to its own)
                     logExchangeMatrix[i][j] = 1.0;
                 } else {
-                    // 使用获得的汇率值，如果没有特定的汇率，可以考虑将缺失的值设置为默认值或特殊值
+                    // Use the obtained exchange rate value, if there is no specific exchange rate, you can consider setting the missing value to the default value or special value
                     String fromCurrency = currencies[i];
                     String toCurrency = currencies[j];
                     double exchangeRate = exchangeRates.getOrDefault(toCurrency, 0.0) / exchangeRates.getOrDefault(fromCurrency, 1.0);
 
-                    // 计算-log值并存储到矩阵中
+                    // Store the value in the matrix
                     logExchangeMatrix[i][j] = -Math.log10(exchangeRate);
                 }
             }
@@ -54,13 +54,15 @@ public class GenerateMatrix {
     }
 
     public void printMatrix(double[][] matrix, String[] currencies) {
-        // 打印矩阵
+        // Print the matrix
         System.out.print("\t\t\t");
+        // Print the currency code
         for (String currency : currencies) {
             System.out.printf("%-10s\t", currency);
         }
         System.out.println();
 
+        // Print the exchange rate
         for (int i = 0; i < matrix.length; i++) {
             System.out.printf("%-10s\t", currencies[i]);
             for (int j = 0; j < matrix[i].length; j++) {

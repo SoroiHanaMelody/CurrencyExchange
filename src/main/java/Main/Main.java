@@ -10,41 +10,39 @@ import java.util.Scanner;
 import static API.getData.getRate;
 import CurrencyExchange.CurrencyExchange;
 
-// 按两次 Shift 打开“随处搜索”对话框并输入 `show whitespaces`，
-// 然后按 Enter 键。现在，您可以在代码中看到空格字符。
 public class Main {
     public static void main(String[] args) {
-        //获取当前实时汇率数据
+        // Get current real-time exchange rate data
         api api = new api();
         String datasource = api.fetchData();
-        // 从用户输入中获取货币代码字符串
+        // Gets the currency code string from user input
         Scanner scanner = new Scanner(System.in);
-        System.out.println("请输入所有货币代码，以 '/' 分隔：");
+        System.out.println("Please enter all currency codes，divided by '/'：");
         String currencyInput = scanner.nextLine();
 
-        // 将输入的货币代码字符串分割成数组
+        // Split the currency code string into an array
         String[] currencies = currencyInput.split("/");
 
-        // 创建一个示例的汇率数据（你的实际情况可能需要从 API 或其他数据源中获取）
+        // Get the exchange rate of each currency
         Map<String, Double> exchangeRates = new HashMap<>();
         for (String currency : currencies) {
             String currencyCode = currency.trim();
             exchangeRates.put(currencyCode, getRate(currencyCode, datasource));
         }
 
-        //创建 GenerateMatrix 实例并生成矩阵
+        // Generate the exchange rate matrix
         GenerateMatrix matrixGenerator = new GenerateMatrix();
         double[][] exchangeMatrix = matrixGenerator.createExchangeMatrix(currencies, exchangeRates);
         double[][] logExchangeMatrix = matrixGenerator.createlogExchangeMatrix(currencies, exchangeRates);
 
-        // 打印生成的矩阵
+        // Print the matrix
         System.out.println("\nCurrency Matrix：");
         matrixGenerator.printMatrix(exchangeMatrix, currencies);
         System.out.println("\n-Log Currency Matrix：");
         matrixGenerator.printMatrix(logExchangeMatrix, currencies);
         System.out.println();
 
-        //寻找套汇路径
+        // Find the arbitrage opportunity
         CurrencyExchange currencyExchange = new CurrencyExchange();
         currencyExchange.findArbitrage(exchangeMatrix, currencies);
     }
